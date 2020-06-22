@@ -6,6 +6,8 @@ public class FollowCamera : MonoBehaviour
     private Player _player;
     [SerializeField]
     private float _lead;
+    [SerializeField]
+    private float _speed;
 
     private void LateUpdate()
     {
@@ -15,7 +17,7 @@ public class FollowCamera : MonoBehaviour
             lead = -lead;
 
         var position = this.transform.position;
-        position.x = this._player.transform.position.x + lead;
+        position.x += (this._player.transform.position.x + lead - position.x) * Time.deltaTime * this._speed;
         this.transform.position = position;
     }
 }
